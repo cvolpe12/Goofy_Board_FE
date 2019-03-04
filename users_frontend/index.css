@@ -1,0 +1,6 @@
+#character-container {
+width: 800px;
+height: 600px;
+position: relative;
+background: blue;
+}
