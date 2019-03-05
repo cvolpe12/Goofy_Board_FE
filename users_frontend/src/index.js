@@ -5,12 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const dead = document.querySelector('#splat')
   const bug = document.querySelector('#bug')
   var ctx = gameCanvas.getContext("2d")
-
+  let bugId = 1
   let score = 0
 
-  // gameCanvas.addEventListener("click", (e)=>{
-  //   console.log(e.target);
-  // })
+  // Class======================================================================
+
 
   //EVENT LISTENERS=============================================================
   gameScreen.addEventListener("click", splat)
@@ -18,20 +17,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //FUNCTIONS===================================================================
   function spawnEnemy(){
-    let enemy = bug
+    let enemy = new Image(100, 100)
+    // let enemy = bug
+    enemy.onload = {
+
+    }
+    enemy.src = "images/ahh_bug.png"
+    enemy.id = "bug"
+    enemy.dataset.id = bugId++
     let x = Math.random() * 850
     let y = Math.random() * 450
     if ((y > 60 && y < 450) && (x > 10 && x < 850)) {
       enemy.style = `position:absolute; left:${x}px; top: ${y}px;`
+      gameScreen.appendChild(enemy)
     } else {
       spawnEnemy()
     }
+    // debugger
   }
 
   function multipleEnemies(){
-    var times = 10;
+    var times = 1;
     for(var i=0; i < times; i++){
       setInterval(spawnEnemy, 1000)
+      // debugger
     }
   }
 
@@ -42,13 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("splat");
     }
     setTimeout(function(){
-      debugger
+      // debugger
       var splatImg = gameScreen.querySelector('#bug');
       gameScreen.removeChild(splatImg)
     }, 1000)
   }
 
 
-
+  // spawnEnemy()
   // multipleEnemies()
 })
