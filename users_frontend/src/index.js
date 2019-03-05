@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const gameCanvas = document.querySelector("#game-canvas")
   const snowboarder = document.querySelector('#character')
+  var ctx = gameCanvas.getContext("2d")
+  ctx.drawImage(snowboarder, 10, 10);
 
   document.addEventListener("keydown", moveCharacter)
   document.addEventListener("click", (e)=> {console.log(e);})
