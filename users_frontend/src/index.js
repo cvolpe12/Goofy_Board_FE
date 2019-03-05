@@ -1,12 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const gameCanvas = document.querySelector("#game-canvas")
-  const snowboarder = document.querySelector('#character')
-  var ctx = gameCanvas.getContext("2d")
-  ctx.drawImage(snowboarder, 10, 10);
+  //VARIABLES===================================================================
+  var snowboarder = document.querySelector("#character")
 
+  var myGameArea = {
+    canvas: document.createElement("canvas"),
+    start: function() {
+      this.canvas.setAttribute("id","game-canvas")
+      this.canvas.width = 900;
+      this.canvas.height = 500;
+      this.context = this.canvas.getContext("2d");
+      document.body.insertBefore(this.canvas, document.body.childNodes[2])
+    }
+  }
+
+  //CALLS=======================================================================
+  startGame()
+
+  //EVENT LISTENERS=============================================================
   document.addEventListener("keydown", moveCharacter)
   document.addEventListener("click", (e)=> {console.log(e);})
 
+  //FUNCTIONS===================================================================
+  function startGame() {
+    myGameArea.start();
+  }
   function moveCharacter(e) {
     // console.log(e);
     switch (e.code) {
