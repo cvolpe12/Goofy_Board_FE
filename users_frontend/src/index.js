@@ -1,8 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const snowboarder = document.querySelector('#character')
+  const log = document.querySelector('#log')
+  const tree = document.querySelector('#tree')
+  const canvas = document.querySelector('#canvas')
 
   document.addEventListener("keydown", moveCharacter)
   document.addEventListener("click", (e)=> {console.log(e);})
+
+  function changeCanvasSize(){
+    canvas.width = 600;
+    canvas.height = 800;
+
+    avatarImage.src = "images/snowboarder.png";
+    canvas.getContext("2d").drawImage(avatarImage, 400, 400);
+  }
+
+// game over
+  // if bottom px of log = start px of snowboard game over
+  // unless
+  // space bar is hit (jump)
+  // if side px of image = side px of snowboard game over
+
+// game start
+// scoring
+  // counting time elapsed
+  // create form for initials
+
+// change images to programmer stuff
+
+
+
+
+
+
+
+
+
 
   function moveCharacter(e) {
     // console.log(e);
@@ -10,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
       case "ArrowRight":
         e.preventDefault()
         moveRight()
-        // console.log(snowboarder);
         break;
       case "ArrowLeft":
         e.preventDefault()
@@ -26,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   function moveRight(){
-    console.log(snowboarder.style.left);
     if (parseInt(snowboarder.style.left) >= 700) {
       snowboarder.style.left = 700 + 'px'
     } else {
@@ -45,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var interval = setInterval(function() {
         x++;
-        snowboarder.style.top = 250 - (-0.1 * x * (x - 50)) + 'px';
-
+        snowboarder.style.top = 200 - (-0.1 * x * (x - 50)) + 'px';
+                          //this number needs to be the starting position
         if(x >= 50) clearInterval(interval);
     }, 20);
   }
