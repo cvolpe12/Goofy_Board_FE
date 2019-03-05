@@ -28,6 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function multipleEnemies(){
+    var times = 10;
+    for(var i=0; i < times; i++){
+      setInterval(spawnEnemy, 1000)
+    }
+  }
+
   function splat(e){
     console.log(e.target);
     if (e.target.id === "bug") {
@@ -42,6 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  //CALLS=======================================================================
-  spawnEnemy()
+
+  // multipleEnemies()
 })
