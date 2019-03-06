@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreCount = document.querySelector('#score')
   let bugId = 1
   let hit = []
-  let miss = []
+  let missedBugs = []
   let screenBugs = []
 
-  document.addEventListener("click", (e)=>{console.log(e)})
+  // document.addEventListener("click", (e)=>{console.log(e)})
   // THINGS TO DO ==============================================================
   // remove bug after interval (from dom(removeChild) and array(pop)?)
   // bugs dont overlap
@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   //FUNCTIONS===================================================================
+
+
   function spawnEnemy(){
     let time = 0
     let enemy = new Image(100, 100)
@@ -37,19 +39,31 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       spawnEnemy()
     }
-    console.log(screenBugs);
-    //
-    //
-    //
-    // debugger
+    // setTimeout(()=> {
+    //   missed
+    // }, 5000)
+    // starts time to 5 sec
+    // at 5 sec popped off screen
+    // if 5 sec elapses push into miss array
+    console.log("screen", screenBugs);
+  }
+// if screenBugs.forEach(bug.id === splat)
+//  push into hit and remove from screenBugs
+// else if screenBugs.forEach(bug.id === bug)
+//
+  function missed(){
+    var bugImg = gameScreen.querySelector('#bug');
+    // missedBugs.push(bugImg)
+    debugger
+
+    gameScreen.removeChild(bugImg)
+    console.log(bugImg.dataset.id);
   }
 
   function multipleEnemies(time){
     var times = 1;
-    // debugger
     for(var i=0; i < times; i++){
       setInterval(spawnEnemy, time)
-      console.log(time);
     }
   }
 
@@ -58,22 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.id === "bug") {
       e.target.src = "images/red_splat.png"
       e.target.id = "splat"
-      // console.log("splat");
       score(e.target)
     }
     setTimeout(function(){
-      // debugger
       var splatImg = gameScreen.querySelector('#splat');
-      // debugger
       gameScreen.removeChild(splatImg)
     }, 1000)
   }
 
   function score(deadBug){
     hit.push(deadBug)
-    if(hit.length%10 === 0) {
-      speedUp()
+    let index = screenBugs.indexOf(deadBug)
+    if (index > -1) {
+      screenBugs.splice(index, 1)
     }
+    // console.log("allBugs", screenBugs);
+    // console.log("#", screenBugs.length);
+    // if(hit.length % 10 === 0) {
+    //   speedUp()
+    // }
+    console.log("hit", hit);
     scoreCount.innerHTML = `Score: ${hit.length}`
   }
 
@@ -84,7 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
       multipleEnemies(1000)
     }
   }
+
   // spawnEnemy()
   // speedUp()
+  // multipleEnemies(2000)
 
 }) //end of DOMContentLoaded
