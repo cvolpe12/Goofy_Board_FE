@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const dead = document.querySelector('#splat')
   const bug = document.querySelector('#bug')
   const scoreCount = document.querySelector('#score')
+  const usersURL = "http://localhost:3000/api/v1/users"
+  const scoresURL = "http://localhost:3000/api/v1/scores"
+  let bugLoop = setInterval(spawnEnemy, 1000)
+  let gameStatus = false
   let bugId = 1
   let hit = []
   let missedBugs = []
@@ -22,48 +26,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //FUNCTIONS===================================================================
 
+  function gameOver(){
+
+  }
 
   function spawnEnemy(){
-    let time = 0
     let enemy = new Image(100, 100)
-    enemy.src = "images/ahh_bug.png"
-    enemy.id = "bug"
-    enemy.dataset.id = bugId++
     let x = Math.random() * 850
     let y = Math.random() * 590
-    //if bug doesn't collide with div && doesn't collide with another bug
     if ((y > 100 && y < 590) && (x > 10 && x < 850)) {
+      enemy.src = "images/ahh_bug.png"
+      enemy.id = "bug"
+      enemy.dataset.id = bugId++
       enemy.style = `position:absolute; left:${x}px; top: ${y}px;`
       gameScreen.appendChild(enemy)
       screenBugs.push(enemy)
     } else {
       spawnEnemy()
     }
-    // setTimeout(()=> {
-    //   missed
-    // }, 5000)
-    // starts time to 5 sec
-    // at 5 sec popped off screen
-    // if 5 sec elapses push into miss array
-    console.log("screen", screenBugs);
-  }
-// if screenBugs.forEach(bug.id === splat)
-//  push into hit and remove from screenBugs
-// else if screenBugs.forEach(bug.id === bug)
-//
-  function missed(){
-    var bugImg = gameScreen.querySelector('#bug');
-    // missedBugs.push(bugImg)
-    debugger
-
-    gameScreen.removeChild(bugImg)
-    console.log(bugImg.dataset.id);
+    if (screenBugs.length > 5) {
+      gameStatus = true
+      gameFlow()
+    }
   }
 
-  function multipleEnemies(time){
-    var times = 1;
-    for(var i=0; i < times; i++){
-      setInterval(spawnEnemy, time)
+  function gameFlow(){
+    if(gameStatus === false){
+      bugLoop
+    } else {
+      console.log("game over")
+      clearInterval(bugLoop)
+      gameScreen.removeEventListener("click", splat)
     }
   }
 
@@ -86,25 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (index > -1) {
       screenBugs.splice(index, 1)
     }
-    // console.log("allBugs", screenBugs);
-    // console.log("#", screenBugs.length);
-    // if(hit.length % 10 === 0) {
-    //   speedUp()
-    // }
-    console.log("hit", hit);
     scoreCount.innerHTML = `Score: ${hit.length}`
   }
 
-  function speedUp(){
-    if(hit.length < 10){
-      multipleEnemies(2000)
-    } else if (hit.length >= 10){
-      multipleEnemies(1000)
-    }
-  }
+
+  gameFlow()
 
   // spawnEnemy()
-  // speedUp()
-  // multipleEnemies(2000)
+  // multipleEnemies()
+  // gameOver()
 
 }) //end of DOMContentLoaded

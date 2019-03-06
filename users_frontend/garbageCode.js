@@ -109,3 +109,75 @@ for (var i = 0; i < numOfDrops; i++) {
         if(x >= 50) clearInterval(interval);
     }, 20);
   }
+// ====================================================================================================================
+// ====================================================================================================================
+// ====================================================================================================================
+// ====================================================================================================================
+// Trying to end game with missed bugs
+function removeEnemy(){
+  // wait 6 seconds
+  // interval every 2 seconds
+  // wait(6000)
+  let firstBug = parseInt(screenBugs[0].dataset.id)
+  let lastBug = parseInt(screenBugs[screenBugs.length - 1].dataset.id)
+  let firstScreenBug = gameScreen.querySelector(`img[data-id="${firstBug}"]`)
+  console.log(firstScreenBug)
+  console.log(lastBug);
+  if ((firstBug + 2) <= lastBug) {
+    debugger
+    missedBugs.push(firstScreenBug)
+    screenBugs.shift()
+    gameScreen.removeChild(splatImg)
+    console.log('bugs should be removed');
+  }
+}
+
+function missed(){
+  var bugImg = gameScreen.querySelector('#bug');
+  // missedBugs.push(bugImg)
+  debugger
+
+  gameScreen.removeChild(bugImg)
+  console.log(bugImg.dataset.id);
+}
+
+// function fetchUsers(){
+//   fetch(usersURL,{
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify({
+//       username: ,
+//       scores: []
+//     })
+//   })
+// }
+//
+// function patchUsers(){
+//   fetch(usersURL + "/" + id, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify({
+//       scores:
+//     })
+//   })
+// }
+//
+// function fetchScores(){
+//   fetch(scoresURL,{
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify({
+//       points: hit.length,
+//       user_id:
+//     })
+//   })
+// }
