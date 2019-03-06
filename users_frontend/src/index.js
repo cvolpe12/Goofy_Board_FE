@@ -22,13 +22,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //EVENT LISTENERS=============================================================
   gameScreen.addEventListener("click", splat)
+  gameScreen.addEventListener("submit", (e)=>{
+    e.preventDefault()
+    fetchNewUsers()
+  })
 
 
   //FUNCTIONS===================================================================
 
   function gameOver(){
-
+    gameScreen.innerHTML = `
+    <form id="new-user" method="post">
+      Username: <input type="text" id="username" placeholder="Your Initials">
+      <input type="submit" value="Submit">
+    </form>
+    `
   }
+
+  function fetchNewUsers(){
+    let username = document.querySelector("#username")
+    console.log("working?")
+    console.log(hit.length);
+    fetch(usersURL,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        username: username.value,
+        scores: [
+          {
+            points: hit.length
+          }
+        ]
+      })
+    })
+  }
+
 
   function spawnEnemy(){
     let enemy = new Image(100, 100)
@@ -57,6 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("game over")
       clearInterval(bugLoop)
       gameScreen.removeEventListener("click", splat)
+      wait(5000)
+      gameOver()
     }
   }
 
@@ -80,6 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
       screenBugs.splice(index, 1)
     }
     scoreCount.innerHTML = `Score: ${hit.length}`
+  }
+
+  function wait(ms){
+     var start = new Date().getTime();
+     var end = start;
+     while(end < start + ms) {
+       end = new Date().getTime();
+    }
   }
 
 
