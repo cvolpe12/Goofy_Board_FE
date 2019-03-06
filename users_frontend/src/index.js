@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let screenBugs = []
 
   document.addEventListener("click", (e)=>{console.log(e)})
+  // THINGS TO DO ==============================================================
+  // remove bug after interval (from dom(removeChild) and array(pop)?)
+  // bugs dont overlap
+
 
   //EVENT LISTENERS=============================================================
   gameScreen.addEventListener("click", splat)
@@ -59,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setTimeout(function(){
       // debugger
-      var splatImg = gameScreen.querySelector('#bug');
+      var splatImg = gameScreen.querySelector('#splat');
+      // debugger
       gameScreen.removeChild(splatImg)
     }, 1000)
   }
