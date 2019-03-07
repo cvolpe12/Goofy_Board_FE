@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
     diffBtn.style.display = "block"
     // debugger
     if (e.target.id === "easy") {
-      gameFlow(2000)
+      gameFlow(666)
     }
     if (e.target.id === "medium") {
-      gameFlow(1000)
+      gameFlow(500)
     }
     if (e.target.id === "hard") {
-      gameFlow(500)
+      gameFlow(333)
     }
   }
 
