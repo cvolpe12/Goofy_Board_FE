@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreCount = document.querySelector('#score')
   const usersURL = "http://localhost:3000/api/v1/users"
   const scoresURL = "http://localhost:3000/api/v1/scores"
-  let bugLoop = setInterval(spawnEnemy, 1000)
+  const playBtn = document.querySelector('#play')
+  const newUserForm = document.querySelector('#overlay-2')
+  let bugLoop; // this will run the game
   let gameStatus = false
   let bugId = 1
   let hit = []
@@ -22,24 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //EVENT LISTENERS=============================================================
   gameScreen.addEventListener("click", splat)
-  gameScreen.addEventListener("submit", (e)=>{
+  newUserForm.addEventListener("submit", (e)=>{
     e.preventDefault()
     fetchNewUsers()
   })
+  playBtn.addEventListener("click", chooseDifficulty)
 
 
   //FUNCTIONS===================================================================
 
   function gameOver(){
-    gameScreen.innerHTML = `
-    <form id="new-user" method="post">
-      Username: <input type="text" id="username" placeholder="Your Initials">
-      <input type="submit" value="Submit">
-    </form>
-    `
+    newUserForm.style.display = "block"
   }
 
+  function chooseDifficulty(){
+    gameFlow(1000)
+  }
+
+
   function fetchNewUsers(){
+    debugger
     let username = document.querySelector("#username")
     console.log("working?")
     console.log(hit.length);
@@ -60,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-
   function spawnEnemy(){
     let enemy = new Image(100, 100)
     let x = Math.random() * 850
@@ -77,18 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (screenBugs.length > 5) {
       gameStatus = true
-      gameFlow()
+      gameFlow(50)
+      // ^^ need to call but could pass arbitrary value
     }
   }
-
-  function gameFlow(){
+// for difficulty we pass a time arg that will determine bugLoop
+  function gameFlow(time){
+    document.querySelector("#overlay").style.display = "none";
     if(gameStatus === false){
-      bugLoop
+      bugLoop = setInterval(spawnEnemy, time)
     } else {
       console.log("game over")
       clearInterval(bugLoop)
+      bugLoop = 0
       gameScreen.removeEventListener("click", splat)
-      wait(5000)
+      wait(3000)
       gameOver()
     }
   }
@@ -123,9 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // function gameStart() {
+  //   var bugLoop = setInterval(spawnEnemy, 1000)
+  // }
 
-  gameFlow()
-
+  // gameFlow()
+  // bugLoop()
   // spawnEnemy()
   // multipleEnemies()
   // gameOver()
