@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function gameFlow(time){
+    wait(1000)
     diffBtn.style.display = "none"
     newUserForm.style.display = "none";
     // console.log(screenBugs);
@@ -118,6 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(bugLoop)
       bugLoop = 0
       gameScreen.removeEventListener("click", splat)
+      if (bugPoints === undefined) {
+        bugPoints = 0
+      } else {
+        bugPoints = bugPoints
+      }
+      debugger
       alert(`GAME OVER! YOUR SCORE IS ${bugPoints}`)
       gameOver()
     }
