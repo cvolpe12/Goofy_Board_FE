@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const replayBtn = document.querySelector('#replay')
   const newUserForm = document.querySelector('#overlay-3')
   const diffBtn = document.querySelector('#overlay-2')
-  let userId = 0
   let bugLoop; // this will run the game
   let gameStatus = false
   let bugId = 1
@@ -41,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function fetchNewUsers(){
     // debugger
-    ++userId
     let username = document.querySelector("#username")
     let formScore = document.querySelector('#form-score').value
     formScore = hit.length
