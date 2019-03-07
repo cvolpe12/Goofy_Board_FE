@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   })
   replayBtn.addEventListener("click", (e)=>{
     clearScreen()
-    chooseDifficulty()})
+    chooseDifficulty(e)})
   playBtn.addEventListener("click", chooseDifficulty)
+  diffBtn.addEventListener("click", chooseDifficulty)
 
   //FETCH===================================================================
 
@@ -68,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //FUNCTIONS===================================================================
   function chooseDifficulty(e){
     document.querySelector("#overlay").style.display = "none";
+    diffBtn.style.display = "block"
+    debugger
     if (e.target.id === "easy") {
       gameFlow(2000)
     }
@@ -79,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // for difficulty we pass a time arg that will determine bugLoop
   function gameFlow(time){
     diffBtn.style.display = "none"
     newUserForm.style.display = "none";
@@ -96,6 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOver()
     }
   }
+
+  function clearScreen(){
+    gameScreen.innerHTML = `<canvas id="game-canvas" width="1000" height="600" style="border:1px solid #000000;">
+      </canvas>`
+    newUserForm.style.display = "none";
+    screenBugs = []
+    gameStatus = false
+    gameScreen.addEventListener("click", splat)
+    hit = []
+    scoreCount.innerHTML = `Score: ${hit.length}`
+  }
+
 
   function spawnEnemy(){
     let enemy = new Image(100, 100)
@@ -117,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // ^^ need to call but could pass arbitrary value
     }
   }
+// for difficulty we pass a time arg that will determine bugLoop
 
   function splat(e){
     // console.log(e.target);
@@ -142,16 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function gameOver(){
     newUserForm.style.display = "block"
-  }
-
-  function clearScreen(){
-    gameScreen.innerHTML = `<canvas id="game-canvas" width="1000" height="600" style="border:1px solid #000000;">
-      </canvas>`
-    screenBugs = []
-    gameStatus = false
-    gameScreen.addEventListener("click", splat)
-    hit = []
-    scoreCount.innerHTML = `Score: ${hit.length}`
   }
 
   function wait(ms){
