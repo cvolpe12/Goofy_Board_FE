@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const diffBtn = document.querySelector('#overlay-2')
   let bugLoop; // this will run the game
   let gameStatus = false
+  let gameDifficulty;
   let bugId = 1
   let hit = []
+  let bugPoints;
   let missedBugs = []
   let screenBugs = []
 
@@ -42,13 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // debugger
     let username = document.querySelector("#username")
     let formScore = document.querySelector('#form-score').value
-    formScore = hit.length
+    debugger
+    formScore = bugPoints
     let scoreData = {
       points: formScore
     }
     console.log("scoreData",scoreData);
     console.log("working?")
-    console.log(hit.length);
+    console.log(bugPoints);
     fetch(usersURL,{
       method: "POST",
       headers: {
@@ -86,12 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
     diffBtn.style.display = "block"
     // debugger
     if (e.target.id === "easy") {
+      gameDifficulty = "easy"
       gameFlow(666)
     }
     if (e.target.id === "medium") {
+      gameDifficulty = "medium"
       gameFlow(500)
     }
     if (e.target.id === "hard") {
+      gameDifficulty = "hard"
       gameFlow(333)
     }
   }
@@ -121,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameStatus = false
     gameScreen.addEventListener("click", splat)
     hit = []
-    scoreCount.innerHTML = `Score: ${hit.length}`
+    scoreCount.innerHTML = `Score: ${bugPoints}`
   }
 
 
@@ -162,11 +168,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function score(deadBug){
     hit.push(deadBug)
+    bugPoints = hit.length
     let index = screenBugs.indexOf(deadBug)
     if (index > -1) {
       screenBugs.splice(index, 1)
     }
-    scoreCount.innerHTML = `Score: ${hit.length}`
+    if (gameDifficulty === "easy") {
+      bugPoints = bugPoints*1000
+      scoreCount.innerHTML = `Score: ${bugPoints}`
+
+    }
+    if (gameDifficulty === "medium") {
+      bugPoints = bugPoints*1500
+      scoreCount.innerHTML = `Score: ${bugPoints}`
+
+    }
+    if (gameDifficulty === "hard") {
+      bugPoints = bugPoints*2000
+      scoreCount.innerHTML = `Score: ${bugPoints}`
+    }
   }
 
   function gameOver(){
