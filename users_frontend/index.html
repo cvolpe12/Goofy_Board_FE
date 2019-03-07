@@ -20,10 +20,19 @@
     </div>
 
     <div id="overlay-2">
+      <h4>Choose Your Difficulty</h4>
+      <button id="easy" type="button">Easy</button>
+      <button id="medium" type="button">Medium</button>
+      <button id="hard" type="button">Hard</button>
+    </div>
+
+    <div id="overlay-3">
       <form id="new-user" method="post">
         Username: <input type="text" id="username" placeholder="Your Initials">
+        <input type="hidden" id="form-score">
         <input id="submit" type="submit" value="Submit">
       </form>
+      <button type="button" id="replay">Replay</button>
     </div>
     <!-- try again -->
     <ul id='score-list'>High Scores</ul>

@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersURL = "http://localhost:3000/api/v1/users"
   const scoresURL = "http://localhost:3000/api/v1/scores"
   const playBtn = document.querySelector('#play')
-  const newUserForm = document.querySelector('#overlay-2')
+  const replayBtn = document.querySelector('#replay')
+  const newUserForm = document.querySelector('#overlay-3')
+  const diffBtn = document.querySelector('#overlay-2')
   let bugLoop; // this will run the game
   let gameStatus = false
   let bugId = 1
@@ -28,23 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     fetchNewUsers()
   })
+  replayBtn.addEventListener("click", (e)=>{
+    clearScreen()
+    chooseDifficulty()})
   playBtn.addEventListener("click", chooseDifficulty)
 
-
-  //FUNCTIONS===================================================================
-
-  function gameOver(){
-    newUserForm.style.display = "block"
-  }
-
-  function chooseDifficulty(){
-    gameFlow(1000)
-  }
-
+  //FETCH===================================================================
 
   function fetchNewUsers(){
     debugger
     let username = document.querySelector("#username")
+    let formScore = document.querySelector('#form-score').value
+    formScore = hit.length
+    let scoreData = {
+      points: formScore
+    }
+    console.log("scoreData",scoreData);
     console.log("working?")
     console.log(hit.length);
     fetch(usersURL,{
@@ -55,13 +56,45 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       body: JSON.stringify({
         username: username.value,
-        scores: [
-          {
-            points: hit.length
-          }
+        scores: [ scoreData
+
         ]
       })
     })
+    .then(res=>res.json())
+    .then(console.log)
+  }
+
+  //FUNCTIONS===================================================================
+  function chooseDifficulty(e){
+    document.querySelector("#overlay").style.display = "none";
+    if (e.target.id === "easy") {
+      gameFlow(2000)
+    }
+    if (e.target.id === "medium") {
+      gameFlow(1000)
+    }
+    if (e.target.id === "hard") {
+      gameFlow(500)
+    }
+  }
+
+  // for difficulty we pass a time arg that will determine bugLoop
+  function gameFlow(time){
+    diffBtn.style.display = "none"
+    newUserForm.style.display = "none";
+    // console.log(screenBugs);
+    // debugger
+    if(gameStatus === false){
+      bugLoop = setInterval(spawnEnemy, time)
+    } else {
+      console.log("game over")
+      clearInterval(bugLoop)
+      bugLoop = 0
+      gameScreen.removeEventListener("click", splat)
+      wait(3000)
+      gameOver()
+    }
   }
 
   function spawnEnemy(){
@@ -82,20 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       gameStatus = true
       gameFlow(50)
       // ^^ need to call but could pass arbitrary value
-    }
-  }
-// for difficulty we pass a time arg that will determine bugLoop
-  function gameFlow(time){
-    document.querySelector("#overlay").style.display = "none";
-    if(gameStatus === false){
-      bugLoop = setInterval(spawnEnemy, time)
-    } else {
-      console.log("game over")
-      clearInterval(bugLoop)
-      bugLoop = 0
-      gameScreen.removeEventListener("click", splat)
-      wait(3000)
-      gameOver()
     }
   }
 
@@ -121,6 +140,20 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreCount.innerHTML = `Score: ${hit.length}`
   }
 
+  function gameOver(){
+    newUserForm.style.display = "block"
+  }
+
+  function clearScreen(){
+    gameScreen.innerHTML = `<canvas id="game-canvas" width="1000" height="600" style="border:1px solid #000000;">
+      </canvas>`
+    screenBugs = []
+    gameStatus = false
+    gameScreen.addEventListener("click", splat)
+    hit = []
+    scoreCount.innerHTML = `Score: ${hit.length}`
+  }
+
   function wait(ms){
      var start = new Date().getTime();
      var end = start;
@@ -129,14 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // function gameStart() {
-  //   var bugLoop = setInterval(spawnEnemy, 1000)
-  // }
 
-  // gameFlow()
-  // bugLoop()
-  // spawnEnemy()
-  // multipleEnemies()
-  // gameOver()
 
 }) //end of DOMContentLoaded
