@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault()
     fetchNewUsers()
     newForm.reset()
-    fetchScores()
   })
   replayBtn.addEventListener("click", (e)=>{
     clearScreen()
@@ -51,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let scoreData = {
       points: formScore
     }
-    console.log("scoreData",scoreData);
-    console.log("working?")
-    console.log(bugPoints);
     fetch(usersURL,{
       method: "POST",
       headers: {
@@ -81,7 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       })
       .then(res => res.json())
-      .then(console.log)
+      .then(scoreData => {
+        fetchScores()
+      })
     })
   }
 
@@ -115,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if(gameStatus === false){
       bugLoop = setInterval(spawnEnemy, time)
     } else {
-      console.log("game over")
       clearInterval(bugLoop)
       bugLoop = 0
       gameScreen.removeEventListener("click", splat)
@@ -124,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         bugPoints = bugPoints
       }
-      debugger
+      // debugger
       alert(`GAME OVER! YOUR SCORE IS ${bugPoints}`)
       gameOver()
     }
