@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const replayBtn = document.querySelector('#replay')
   const newUserForm = document.querySelector('#overlay-3')
   const diffBtn = document.querySelector('#overlay-2')
+  let userId = 0
   let bugLoop; // this will run the game
   let gameStatus = false
   let bugId = 1
@@ -39,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //FETCH===================================================================
 
   function fetchNewUsers(){
-    debugger
+    // debugger
+    ++userId
     let username = document.querySelector("#username")
     let formScore = document.querySelector('#form-score').value
     formScore = hit.length
@@ -56,21 +58,35 @@ document.addEventListener('DOMContentLoaded', () => {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        username: username.value,
-        scores: [ scoreData
-
-        ]
+        username: username.value
       })
     })
     .then(res=>res.json())
-    .then(console.log)
+    .then(userData => {
+      console.log(userData)
+      fetch(scoresURL,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          score: {
+            points: formScore,
+            user_id: userData.id
+          }
+        })
+      })
+      .then(res => res.json())
+      .then(console.log)
+    })
   }
 
   //FUNCTIONS===================================================================
   function chooseDifficulty(e){
     document.querySelector("#overlay").style.display = "none";
     diffBtn.style.display = "block"
-    debugger
+    // debugger
     if (e.target.id === "easy") {
       gameFlow(2000)
     }
