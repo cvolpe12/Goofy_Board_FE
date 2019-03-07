@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const playBtn = document.querySelector('#play')
   const replayBtn = document.querySelector('#replay')
   const newUserForm = document.querySelector('#overlay-3')
+  const newForm = document.querySelector('#new-user')
   const diffBtn = document.querySelector('#overlay-2')
   let bugLoop; // this will run the game
   let gameStatus = false
@@ -31,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   newUserForm.addEventListener("submit", (e)=>{
     e.preventDefault()
     fetchNewUsers()
+    newForm.reset()
+    fetchScores()
   })
   replayBtn.addEventListener("click", (e)=>{
     clearScreen()
@@ -44,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // debugger
     let username = document.querySelector("#username")
     let formScore = document.querySelector('#form-score').value
-    debugger
     formScore = bugPoints
     let scoreData = {
       points: formScore
@@ -83,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+
+
   //FUNCTIONS===================================================================
   function chooseDifficulty(e){
     document.querySelector("#overlay").style.display = "none";
@@ -114,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(bugLoop)
       bugLoop = 0
       gameScreen.removeEventListener("click", splat)
-      wait(3000)
+      alert(`GAME OVER! YOUR SCORE IS ${bugPoints}`)
       gameOver()
     }
   }
@@ -129,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hit = []
     scoreCount.innerHTML = `Score: ${bugPoints}`
   }
-
 
   function spawnEnemy(){
     let enemy = new Image(100, 100)
