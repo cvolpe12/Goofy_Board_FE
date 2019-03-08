@@ -4,16 +4,25 @@
     <meta charset="utf-8">
     <title>DEBUG</title>
     <script src="src/index.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <h3>DEBUG</h3>
     <h4 id="score">Score: 0</h4>
-    <div id="game-screen">
-      <canvas id="game-canvas" width="1000" height="600" style="border:1px solid #000000;">
-      </canvas>
-      <!-- <img id="bug" src="images/ahh_bug.png" alt="" height="150px" width="150px"> -->
-      <!-- <img id="splat" src="images/red_splat.png" alt="" height="50px" width="50px"> -->
+    <div class="game-row">
+      <div class="game-screen-col">
+        <div id="game-screen">
+          <canvas id="game-canvas" width="1000" height="550" style="border:1px solid #000000;">
+          </canvas>
+          <!-- <img id="bug" src="images/ahh_bug.png" alt="" height="150px" width="150px"> -->
+          <!-- <img id="splat" src="images/red_splat.png" alt="" height="50px" width="50px"> -->
+        </div>
+      </div>
+      <div class="score-list-col">
+        <ol id='score-list' type="1">High Scores</ol>
+      </div>
     </div>
     <div id="overlay">
       <button id="play" type="button">Play</button>
@@ -35,7 +44,6 @@
       <button type="button" id="replay">Replay</button>
     </div>
     <!-- try again -->
-    <ol id='score-list' type="1">High Scores</ol>
     <div id='update'></div>
     <script src="src/scores.js" charset="utf-8"></script>
   </body>

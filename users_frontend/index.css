@@ -10,6 +10,7 @@
   /* background-color: rgba(0,0,0,0.5);  */
   z-index: 2;
   cursor: pointer;
+  position: relative;
 }
 
 #overlay-2 {
@@ -38,4 +39,50 @@
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
+}
+
+#play {
+  background-color: black; /* Green */
+  border: none;
+  color: lawngreen;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 40px;
+  margin: auto;
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;
+}
+
+.game-screen-col{
+  float: left ;
+  width: 85% ;
+}
+
+.score-list-col{
+  float: left ;
+  width: 15% ;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 25px;
+}
+
+h3 {
+  font-family: 'Press Start 2P', cursive;
+}
+#game-canvas {
+  background-color: lawngreen;
+  margin-left: 30px;
 }
