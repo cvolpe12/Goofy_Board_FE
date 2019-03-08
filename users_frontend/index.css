@@ -13,6 +13,10 @@
   position: relative;
 }
 
+#bloop {
+  display: none
+}
+
 #overlay-2 {
   position: absolute;
   display: none;
