@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const newUserForm = document.querySelector('#overlay-3')
   const newForm = document.querySelector('#new-user')
   const diffBtn = document.querySelector('#overlay-2')
+  const bloop = document.querySelector('#bloop')
   let bugLoop; // this will run the game
   let gameStatus = false
   let gameDifficulty;
@@ -163,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function splat(e){
     // console.log(e.target);
     if (e.target.id === "bug") {
+      bloop.play()
       e.target.src = "images/red_splat.png"
       e.target.id = "splat"
       score(e.target)
