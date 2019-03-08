@@ -26,7 +26,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  /* background-color: rgba(0,0,0,0.5); */
   z-index: 2;
   cursor: pointer;
 }
@@ -40,7 +40,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
+  /* background-color: rgba(0,0,0,0.5); */
   z-index: 2;
   cursor: pointer;
 }
@@ -173,7 +173,7 @@
   margin: auto;
   position: absolute;
   top: 533px;
-  left: 484px;
+  left: 34%;
 }
 
 .inital-caption{

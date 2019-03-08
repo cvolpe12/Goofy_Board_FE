@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
   newUserForm.addEventListener("submit", (e)=>{
     e.preventDefault()
     fetchNewUsers()
-    newForm.style.display = "none"
   })
   replayBtn.addEventListener("click", (e)=>{
     clearScreen()
@@ -150,9 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function spawnEnemy(){
     let enemy = new Image(100, 100)
-    let x = Math.random() * 880
-    let y = Math.random() * 700
-    if ((y > 150 && y < 700) && (x > 40 && x < 880)) {
+    let x = Math.random() * 950
+    let y = Math.random() * 670
+    if ((y > 200 && y < 630) && (x > 40 && x < 950)) {
       enemy.src = "images/ahh_bug.png"
       enemy.id = "bug"
       enemy.dataset.id = bugId++
