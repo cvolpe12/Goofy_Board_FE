@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let missedBugs = []
   let screenBugs = []
 
-  document.addEventListener("click", (e)=>{console.log(e)})
+  // document.addEventListener("click", (e)=>{console.log(e)})
   // THINGS TO DO ==============================================================
   // remove bug after interval (from dom(removeChild) and array(pop)?)
   // bugs dont overlap
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     .then(userData => {
-      console.log(userData)
+      // console.log(userData)
       fetch(scoresURL,{
         method: "POST",
         headers: {
