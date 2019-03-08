@@ -9,11 +9,16 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h3>DEBUG</h3>
-    <h4 id="score">Score: 0</h4>
+    <div class="title-score-col">
+      <h3>DEBUG</h3>
+      <h4 id="score">Score: 0</h4>
+    </div>
+    <div class="instuctions-col">
+      <p>The program is overrun with bugs! Squash as many bugs as possible to save the program.</p>
+    </div>
     <audio id="bloop"
       controls
-      src="/Users/chrisvolpe/Development/Group/mod3/FE_Goofy_Board/users_frontend/audio/bloop.mp3">
+      src="audio/bloop.mp3">
     </audio>
     <div class="game-row">
       <div class="game-screen-col">
@@ -33,15 +38,16 @@
     </div>
 
     <div id="overlay-2">
-      <h4>Choose Your Difficulty</h4>
-      <button id="easy" type="button">Easy</button>
-      <button id="medium" type="button">Medium</button>
-      <button id="hard" type="button">Hard</button>
+      <h4 class="diff-caption">Choose Your Difficulty</h4>
+      <button class="difficulty-btn" id="easy" type="button">Easy</button>
+      <button class="difficulty-btn" id="medium" type="button">Medium</button>
+      <button class="difficulty-btn" id="hard" type="button">Hard</button>
     </div>
 
     <div id="overlay-3">
       <form id="new-user" method="post">
-        Username: <input type="text" id="username" placeholder="Your Initials">
+        <p class="initial-caption">Enter Initials (3 characters!)</p>
+        <input type="text" id="username" placeholder="Your Initials"><br>
         <input type="hidden" id="form-score">
         <input id="submit" type="submit" value="Submit">
       </form>

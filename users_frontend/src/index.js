@@ -61,7 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         username: username.value
       })
     })
-    .then(res=>res.json())
+    .then(response=>{
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Enter 3 characters');
+      }
+    })
     .then(userData => {
       console.log(userData)
       fetch(scoresURL,{
@@ -81,6 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(scoreData => {
         fetchScores()
       })
+    })
+    .catch(error=>{
+      alert(error)
     })
   }
 

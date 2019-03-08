@@ -45,6 +45,11 @@
   cursor: pointer;
 }
 
+#game-canvas {
+  background-color: lawngreen;
+  margin-left: 30px;
+}
+
 #play {
   background-color: black; /* Green */
   border: none;
@@ -60,20 +65,140 @@
   padding: 20px;
 
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 360px;
+  left: 40%;
 
   margin: -70px 0 0 -170px;
 }
 
+.difficulty-btn {
+  background-color: black; /* Green */
+  border: none;
+  color: lawngreen;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 30px;
+}
+
+.diff-caption {
+  font-size: 30px;
+  margin: auto;
+  position: absolute;
+  top: 350px;
+  left: 28%;
+}
+
+#easy {
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  margin: auto;
+  position: absolute;
+  top: 425px;
+  left: 14%;
+}
+
+#medium {
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  margin: auto;
+  position: absolute;
+  top: 425px;
+  left: 30%;
+}
+
+#hard {
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  margin: auto;
+  position: absolute;
+  top: 425px;
+  left: 49%;
+}
+
+#new-user {
+  margin: auto;
+  position: absolute;
+  top: 280px;
+  left: 28%;
+}
+
+#username {
+  background-color: black;
+  color: white;
+  border: none;
+  outline: none;
+  font-family: 'VT323', monospace;
+  font-size: 40px;
+  text-align: center;
+  height: 120px;
+  width: 300px;
+  margin: auto;
+}
+
+#submit {
+  background-color: black; /* Green */
+  border: none;
+  color: lawngreen;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  width: 145px;
+  height: 50px;
+  padding: 15px;
+  margin: auto;
+  position: absolute;
+  top: 200px;
+  left: 26%;
+}
+
+#replay {
+  background-color: black; /* Green */
+  border: none;
+  color: lawngreen;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  width: 145px;
+  height: 50px;
+  padding: 15px;
+  margin: auto;
+  position: absolute;
+  top: 533px;
+  left: 484px;
+}
+
+.inital-caption{
+
+}
+
 .game-screen-col{
   float: left ;
-  width: 85% ;
+  width: 80% ;
 }
 
 .score-list-col{
   float: left ;
-  width: 15% ;
+  width: 20% ;
+}
+
+.title-score-col{
+  float: left ;
+  width: 40% ;
+}
+
+.instructions-col{
+  float: left ;
+  width: 60% ;
+  /* font-size: 30px; */
 }
 
 body {
@@ -85,8 +210,4 @@ body {
 
 h3 {
   font-family: 'Press Start 2P', cursive;
-}
-#game-canvas {
-  background-color: lawngreen;
-  margin-left: 30px;
 }
